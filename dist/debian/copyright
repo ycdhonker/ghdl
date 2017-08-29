@@ -1,0 +1,60 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: GHDL
+Source: http://sourceforge.net/projects/ghdl-updates/
+Upstream-Contact: ghdl-discuss@gna.org
+
+Files: *
+Copyright: 2002-2017 Tristan Gingold & GHDL Contributors
+License: GPL-2+
+
+Files: doc/ghdl.texi doc/ghdl.html
+Copyright: 2002-2017 Tristan Gingold
+License: GFDL-NIV-1.1+
+ Permission is granted to copy, distribute and/or modify this document
+ under the terms of the GNU Free Documentation License, Version 1.1 or
+ any later version published by the Free Software Foundation.
+ .
+ A copy of the license is included in the file FDL-1.1.txt.
+
+Files: libraries/synopsys/*
+Copyright: 1990-1992 Synopsys, Inc.
+License: synopsys
+ This source file may be used and distributed without restriction
+ provided that this copyright statement is not removed from the file
+ and that any derivative work contains this copyright notice.
+
+Files: debian/*
+Copyright: 2004-2009 Wesley J. Landaker
+License: GPL-3+
+
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, you can find a copy in: /usr/share/common-licenses/GPL-2
+
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or (at
+ your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program. If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, you can find a copy in: /usr/share/common-licenses/GPL-3

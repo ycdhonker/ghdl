@@ -46,64 +46,43 @@ printf "$ANSI_YELLOW[Info] Environment $ANSI_NOCOLOR\n"
 env
 echo "travis_fold:end:env.docker"
 
-#--- Configure
 
-echo "travis_fold:start:configure"
-printf "$ANSI_YELLOW[GHDL] Configure $ANSI_NOCOLOR\n"
+#--- Create source package
 
-CDIR=$(pwd)
-prefix="$CDIR/install-$BLD"
-mkdir "$prefix"
-mkdir "build-$BLD"
-cd "build-$BLD"
+echo "travis_fold:start:gpl.src"
+printf "$ANSI_YELLOW[Source] create GPL sources $ANSI_NOCOLOR\n"
+PKG_DIR="ghdl-gpl-$TAG"
+mv dist/debian .
+files=`echo *`
+sed -e 's/@abs_srcdir@/./g' < Makefile.in > Makefile.tmp
+make -f Makefile.tmp clean-pure-gpl
+rm -f Makefile.tmp
+mkdir ${PKG_DIR}
+mv $files ${PKG_DIR}
+tar -zcf "ghdl-gpl_${TAG}.orig.tar.gz" ${PKG_DIR}
+PKG_NAME="${PKG_DIR}-${BLD}"
+echo "travis_fold:end:gpl.src"
 
-case "$BLD" in
-    mcode)
-	config_opts="" ;;
-    llvm)
-	config_opts="--with-llvm-config" ;;
-    llvm-3.5)
-	config_opts="--with-llvm-config=llvm-config-3.5 CXX=clang++" ;;
-    llvm-3.8)
-	config_opts="--with-llvm-config=llvm-config-3.8 CXX=clang++-3.8" ;;
-    docker)
-	echo "Check docker container!"
-	exit 0;;
-    *)
-	echo "$ANSI_RED[GHDL - build] Unknown build $BLD $ANSI_NOCOLOR"
-	exit 1;;
-esac
-echo "../configure --prefix=$prefix $config_opts"
-../configure "--prefix=$prefix" $config_opts
-echo "travis_fold:end:configure"
 
-#--- make
+#--- Build package
 
-echo "travis_fold:start:make"
-travis_time_start
-printf "$ANSI_YELLOW[GHDL] Make $ANSI_NOCOLOR\n"
-make
-travis_time_finish
-echo "travis_fold:end:make"
+echo "travis_fold:start:build"
+echo "$ANSI_YELLOW[GHDL] Build package $ANSO_NOCOLOR"
+cd $PKG_DIR
+debuild -us -uc
+echo "travis_fold:end:build"
+
+
+#--- Install package
 
 echo "travis_fold:start:install"
-printf "$ANSI_YELLOW[GHDL] Install $ANSI_NOCOLOR\n"
-make install
-cd ..
+echo "$ANSI_YELLOW[GHDL] Install package $ANSI_NOCOLOR"
+sudo dpkg -i ../*.deb
 echo "travis_fold:end:install"
-
-#--- package binary
-
-PKG_NAME="ghdl-$TAG-$BLD-$DIST"
-
-echo "travis_fold:start:tar.bin"
-printf "$ANSI_YELLOW[GHDL] Create package ${ANSI_DARKCYAN}${PKG_NAME}.tgz $ANSI_NOCOLOR\n"
-tar -zcvf "${PKG_NAME}.tgz" -C "$prefix" .
-echo "travis_fold:end:tar.bin"
 
 #--- test
 
-export GHDL="$prefix/bin/ghdl"
+export GHDL=ghdl
 cd testsuite
 failures=""
 

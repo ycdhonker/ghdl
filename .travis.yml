@@ -15,7 +15,7 @@ matrix:
       dist: trusty
       sudo: required
       services: docker
-      env: IMAGE=stretch+mcode+gpl
+      env: IMAGE=stretch+mcode+debian
     - os: linux
       dist: trusty
       sudo: required

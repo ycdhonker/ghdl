@@ -17,11 +17,11 @@ echo -en "travis_fold:end:travis_env\r"
 
 # Compute package name
 
-PKG_SHORTCOMMIT="$(printf $TRAVIS_COMMIT | cut -c1-10)"
-PKG_VER=`grep Ghdl_Ver src/version.in | sed -e 's/.*"\(.*\)";/\1/'`
-PKG_TAG="$TRAVIS_TAG"
+# GIT_VER=`grep Ghdl_Ver src/version.in | sed -e 's/.*"\(.*\)";/\1/'`
+GIT_TAG="$TRAVIS_TAG"
 if [ -z "$TRAVIS_TAG" ]; then
-    PKG_TAG="$(date -u +%Y%m%d)-$PKG_SHORTCOMMIT";
+    GIT_SHORTCOMMIT="$(echo $TRAVIS_COMMIT | cut -c1-10)"
+    GIT_TAG="$(date -u +%Y%m%d)-$GIT_SHORTCOMMIT";
 fi
 
 if [ "$IMAGE" = "" ]; then
@@ -32,15 +32,16 @@ fi
 IFS='+' read -ra REFS <<< "$IMAGE"
 DDIST=${REFS[0]}
 DBLD=${REFS[1]}
-DGPL=${REFS[2]}
+DPKG=${REFS[2]:-none}
 
 PKG_NAME="ghdl-${PKG_TAG}-${DBLD}-${DDIST}"
-BUILD_CMD="./dist/linux/buildtest.sh $ENABLECOLOR -b $DBLD"
-if [ "$DGPL" = "gpl" ]; then
-    BUILD_CMD="$BUILD_CMD --gpl"
-    PKG_NAME="ghdl-gpl-${PKG_TAG}"
-fi
-BUILD_CMD="${BUILD_CMD} -p $PKG_NAME"
+
+case ${DPKG} in
+    none) BUILD_CMD="./dist/linux/buildtest.sh";;
+    debian) BUILD_CMD="./dist/linux/buildtest-debian.sh";;
+    *) echo "unknown package $DPKG"; exit 1;;
+esac
+BUILD_CMD="$BUILD_CMD $ENABLECOLOR -d $DDIST -b $DBLD -p $DPKG -t $GIT_TAG"
 
 echo "build cmd: $BUILD_CMD"
 
