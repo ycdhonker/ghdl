@@ -37,8 +37,8 @@ DPKG=${REFS[2]:-none}
 PKG_NAME="ghdl-${PKG_TAG}-${DBLD}-${DDIST}"
 
 case ${DPKG} in
-    none) BUILD_CMD="./dist/linux/buildtest.sh";;
-    debian) BUILD_CMD="./dist/linux/buildtest-debian.sh";;
+    none) BUILD_CMD="./dist/travis-ci/buildtest.sh";;
+    debian) BUILD_CMD="./dist/travis-ci/buildtest-debian.sh";;
     *) echo "unknown package $DPKG"; exit 1;;
 esac
 BUILD_CMD="$BUILD_CMD $ENABLECOLOR -d $DDIST -b $DBLD -p $DPKG -t $GIT_TAG"
@@ -58,13 +58,13 @@ else
 
     # Create docker image
 
-    . ./dist/linux/travis-utils.sh
+    . ./dist/travis-ci/travis-utils.sh
 
     echo "travis_fold:start:create"
     travis_time_start
     printf "$ANSI_YELLOW[DOCKER build] Docker build $ANSI_NOCOLOR\n"
 
-    DOCKERFILE="dist/linux/docker/build-$IMAGE"
+    DOCKERFILE="dist/travis-ci/docker/build-$IMAGE"
 
     echo "dockerfile: $DOCKERFILE"
     DOCKER_NAME=`echo $IMAGE | sed -e 's/+/-/g'`

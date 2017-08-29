@@ -8,7 +8,7 @@ echo "$0" "$@"
 # Stop in case of error
 set -e
 
-. dist/linux/travis-utils.sh
+. dist/travis-ci/travis-utils.sh
 
 rm -f build_ok
 
@@ -83,79 +83,7 @@ echo "travis_fold:end:install"
 #--- test
 
 export GHDL=ghdl
-cd testsuite
-failures=""
-
-echo "travis_fold:start:tests.sanity"
-travis_time_start
-printf "$ANSI_YELLOW[Test] sanity $ANSI_NOCOLOR\n"
-cd sanity
-for d in [0-9]*; do
-    cd $d
-    if ./testsuite.sh > test.log 2>&1 ; then
-	echo "sanity $d: ok"
-	# Don't disp log
-    else
-	echo "${ANSI_RED}sanity $d: failed${ANSI_NOCOLOR}"
-	cat test.log
-	failures="$failures $d"
-    fi
-    cd ..
-    # Stop at the first failure
-    [ "$failures" = "" ] || break
-done
-cd ..
-travis_time_finish
-echo "travis_fold:end:tests.sanity"
-[ "$failures" = "" ] || exit 1
-
-if [ "$ISGPL" != "true" ]; then
-    echo "travis_fold:start:tests.gna"
-    travis_time_start
-    printf "$ANSI_YELLOW[Test] gna $ANSI_NOCOLOR\n"
-    cd gna
-    dirs=`./testsuite.sh --list-tests`
-    for d in $dirs; do
-	cd $d
-	if ./testsuite.sh > test.log 2>&1 ; then
-	    echo "gna $d: ok"
-	    # Don't disp log
-	else
-	    echo "${ANSI_RED}gna $d: failed${ANSI_NOCOLOR}"
-	    cat test.log
-	    failures="$failures $d"
-	fi
-	cd ..
-	# Stop at the first failure
-	[ "$failures" = "" ] || break
-    done
-    cd ..
-    travis_time_finish
-    echo "travis_fold:end:tests.gna"
-    [ "$failures" = "" ] || exit 1
+export GHDL="$prefix/bin/ghdl"
+if ./runtests.sh $ENABLECOLOR; then
+    touch build_ok
 fi
-
-echo "travis_fold:start:tests.vests"
-travis_time_start
-printf "$ANSI_YELLOW[Test] vests $ANSI_NOCOLOR\n"
-cd vests
-if ./testsuite.sh > vests.log 2>&1 ; then
-    echo "${ANSI_GREEN}Vests is OK$ANSI_NOCOLOR"
-    wc -l vests.log
-else
-    cat vests.log
-    echo "${ANSI_RED}Vests failure$ANSI_NOCOLOR"
-    failures=vests
-fi
-cd ..
-travis_time_finish
-echo "travis_fold:end:tests.vests"
-[ "$failures" = "" ] || exit 1
-
-$GHDL --version
-cd ..
-
-#---
-
-echo "[SUCCESSFUL]"
-touch build_ok

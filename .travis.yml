@@ -41,7 +41,7 @@ matrix:
 install: true
 
 script:
-- ./dist/linux/travis-ci.sh
+- ./dist/travis-ci/travis-ci.sh
 
 before_deploy:
 - "echo ready to deploy"
