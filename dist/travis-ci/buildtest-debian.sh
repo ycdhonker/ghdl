@@ -59,6 +59,7 @@ rm -f Makefile.tmp
 mkdir ${PKG_DIR}
 mv $files ${PKG_DIR}
 tar -zcf "${PKG_DIR}.orig.tar.gz" ${PKG_DIR}
+ls -l
 echo "travis_fold:end:gpl.src"
 
 
@@ -67,7 +68,7 @@ echo "travis_fold:end:gpl.src"
 echo "travis_fold:start:build"
 echo "$ANSI_YELLOW[GHDL] Build package $ANSO_NOCOLOR"
 cd $PKG_DIR
-debuild -us -uc
+debuild -us -uc < /dev/null
 echo "travis_fold:end:build"
 
 
