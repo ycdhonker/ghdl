@@ -3,8 +3,6 @@
 . dist/ansi_color.sh
 disable_color
 
-echo "$0" "$@"
-
 # Stop in case of error
 set -e
 

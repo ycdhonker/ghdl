@@ -3,8 +3,6 @@
 . dist/ansi_color.sh
 disable_color
 
-echo "$0" "$@"
-
 # Stop in case of error
 set -e
 
@@ -51,7 +49,8 @@ echo "travis_fold:end:env.docker"
 
 echo "travis_fold:start:gpl.src"
 printf "$ANSI_YELLOW[Source] create GPL sources $ANSI_NOCOLOR\n"
-PKG_DIR="ghdl-gpl-$TAG"
+VER=`echo $TAG | sed -e s/-/./g` # dash is not allowed in debian version
+PKG_DIR="ghdl-gpl-$VER"
 mv dist/debian .
 files=`echo *`
 sed -e 's/@abs_srcdir@/./g' < Makefile.in > Makefile.tmp
@@ -59,8 +58,7 @@ make -f Makefile.tmp clean-pure-gpl
 rm -f Makefile.tmp
 mkdir ${PKG_DIR}
 mv $files ${PKG_DIR}
-tar -zcf "ghdl-gpl_${TAG}.orig.tar.gz" ${PKG_DIR}
-PKG_NAME="${PKG_DIR}-${BLD}"
+tar -zcf "${PKG_DIR}.orig.tar.gz" ${PKG_DIR}
 echo "travis_fold:end:gpl.src"
 
 
