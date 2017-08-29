@@ -58,7 +58,7 @@ make -f Makefile.tmp clean-pure-gpl
 rm -f Makefile.tmp
 mkdir ${PKG_DIR}
 mv $files ${PKG_DIR}
-tar -zcf "${PKG_DIR}.orig.tar.gz" ${PKG_DIR}
+tar -zcf "ghdl-gpl_${VER}.orig.tar.gz" ${PKG_DIR}
 ls -l
 echo "travis_fold:end:gpl.src"
 
