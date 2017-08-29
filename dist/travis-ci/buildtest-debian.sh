@@ -84,6 +84,6 @@ echo "travis_fold:end:install"
 
 export GHDL=ghdl
 export GHDL="$prefix/bin/ghdl"
-if ./runtests.sh $ENABLECOLOR; then
+if ./dist/travis-ci/runtests.sh $ENABLECOLOR; then
     touch build_ok
 fi

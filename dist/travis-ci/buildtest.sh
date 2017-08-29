@@ -104,6 +104,6 @@ echo "travis_fold:end:tar.bin"
 #--- test
 
 export GHDL="$prefix/bin/ghdl"
-if ./runtests.sh $ENABLECOLOR; then
+if ./dist/travis-ci/runtests.sh $ENABLECOLOR; then
     touch build_ok
 fi
