@@ -68,7 +68,7 @@ echo "travis_fold:end:gpl.src"
 echo "travis_fold:start:build"
 echo "$ANSI_YELLOW[GHDL] Build package $ANSO_NOCOLOR"
 cd $PKG_DIR
-debuild -us -uc < /dev/null
+dpkg-buildpackage -us -uc
 echo "travis_fold:end:build"
 
 
