@@ -49,8 +49,8 @@ echo "travis_fold:end:env.docker"
 
 echo "travis_fold:start:gpl.src"
 printf "$ANSI_YELLOW[Source] create GPL sources $ANSI_NOCOLOR\n"
-VER=`echo $TAG | sed -e s/-/./g` # dash is not allowed in debian version
-PKG_DIR="ghdl-gpl-$VER"
+VER=`echo $TAG | sed -e s/-/~/g` # dash is not allowed in debian version
+PKG_DIR="ghdl-$VER"
 mv dist/debian .
 files=`echo *`
 sed -e 's/@abs_srcdir@/./g' < Makefile.in > Makefile.tmp
@@ -58,7 +58,7 @@ make -f Makefile.tmp clean-pure-gpl
 rm -f Makefile.tmp
 mkdir ${PKG_DIR}
 mv $files ${PKG_DIR}
-tar -zcf "ghdl-gpl_${VER}.orig.tar.gz" ${PKG_DIR}
+tar -zcf "ghdl_${VER}.orig.tar.gz" ${PKG_DIR}
 ls -l
 echo "travis_fold:end:gpl.src"
 

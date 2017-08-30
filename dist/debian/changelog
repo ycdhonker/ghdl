@@ -36,7 +36,7 @@ ghdl (0.27+svn110+gcc4.3.3+dfsg-1) unstable; urgency=low
   * Now using gcc-4.3.3
   * Updated copyright information
   * Added Vcs-Git information
-  * Updated to policy 3.8.1 
+  * Updated to policy 3.8.1
 
  -- Wesley J. Landaker <wjl@icecavern.net>  Thu, 02 Apr 2009 21:23:07 -0600
 
