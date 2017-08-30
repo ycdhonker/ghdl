@@ -4,5 +4,5 @@ FROM debian:stretch-slim
 RUN apt-get update -qq \
   && apt-get -y install --no-install-recommends \
             debhelper build-essential \
-	    gnat gcc make llvm-dev clang zlib1g-dev libedit-dev \
+	    gnat gcc make llvm-dev clang zlib1g-dev libedit-dev texinfo \
   && apt-get clean
