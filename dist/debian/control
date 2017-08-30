@@ -3,7 +3,6 @@ Section: main/electronics
 Priority: optional
 Maintainer: Tristan Gingold <tgingold@free.fr>
 Build-Depends: debhelper (>= 7), gnat, llvm-dev, clang, zlib1g-dev, libedit-dev, texinfo
-Build-Conflicts: ghdl
 Homepage: https://github.com/tgingold/ghdl
 
 Package: ghdl-gpl
