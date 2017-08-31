@@ -80,7 +80,7 @@ else
 fi
 
 
-ls -l ghdl-*
+ls -ld ghdl-*
 
 if [ ! -f build_ok ]; then
     printf "$ANSI_RED[TRAVIS] BUILD failed $ANSI_NOCOLOR\n"

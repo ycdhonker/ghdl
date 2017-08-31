@@ -74,6 +74,7 @@ echo "travis_fold:start:build"
 echo "$ANSI_YELLOW[GHDL] Build package $ANSO_NOCOLOR"
 cd $PKG_DIR
 dpkg-buildpackage -us -uc
+cd ..
 echo "travis_fold:end:build"
 
 
@@ -81,13 +82,15 @@ echo "travis_fold:end:build"
 
 echo "travis_fold:start:install"
 echo "$ANSI_YELLOW[GHDL] Install package $ANSI_NOCOLOR"
-dpkg -i ../ghdl_*.deb
+dpkg -i ghdl_*.deb
 echo "travis_fold:end:install"
 
 #--- test
 
 export GHDL=ghdl
 export GHDL="$prefix/bin/ghdl"
+cd $PKG_DIR
 if ./dist/travis-ci/runtests.sh $ENABLECOLOR; then
-    touch build_ok
+    touch ../build_ok
 fi
+cd ..
