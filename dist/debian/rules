@@ -15,7 +15,7 @@ build-indep: build-stamp
 build-stamp: configure-stamp
 	dh_testdir
 	$(MAKE)
-	makeinfo --no-split -o doc/ghdl.info doc/ghdl.texi
+	makeinfo --no-split -o ghdl.info doc/ghdl.texi
 	touch build-stamp
 
 install: install-stamp
