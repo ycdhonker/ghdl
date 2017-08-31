@@ -52,6 +52,11 @@ printf "$ANSI_YELLOW[Source] create GPL sources $ANSI_NOCOLOR\n"
 VER=`echo $TAG | sed -e s/-/~/g` # dash is not allowed in debian version
 PKG_DIR="ghdl-$VER"
 mv dist/debian .
+if head -1 debian/changelog | grep -q UNRELEASED; then
+    # Patch debian version with tag
+    sed -i -e "1/s/ghdl .* UNRELEASED/ghdl (${VER}-1) UNRELEASED/" debian/changelog
+fi
+
 files=`echo *`
 sed -e 's/@abs_srcdir@/./g' < Makefile.in > Makefile.tmp
 make -f Makefile.tmp clean-pure-gpl
