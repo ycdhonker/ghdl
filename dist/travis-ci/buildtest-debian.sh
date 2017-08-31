@@ -81,7 +81,7 @@ echo "travis_fold:end:build"
 
 echo "travis_fold:start:install"
 echo "$ANSI_YELLOW[GHDL] Install package $ANSI_NOCOLOR"
-sudo dpkg -i ../ghdl_*.deb
+dpkg -i ../ghdl_*.deb
 echo "travis_fold:end:install"
 
 #--- test
