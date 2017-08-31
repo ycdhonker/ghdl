@@ -94,3 +94,4 @@ if ./dist/travis-ci/runtests.sh $ENABLECOLOR; then
     touch ../build_ok
 fi
 cd ..
+ls -l
