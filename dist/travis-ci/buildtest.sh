@@ -96,7 +96,7 @@ PKG_NAME="ghdl-$TAG-$BLD-$DIST"
 
 echo "travis_fold:start:tar.bin"
 printf "$ANSI_YELLOW[GHDL] Create package ${ANSI_DARKCYAN}${PKG_NAME}.tgz $ANSI_NOCOLOR\n"
-tar -zcvf "../deploy/${PKG_NAME}.tgz" -C "$prefix" .
+tar -zcvf "deploy/${PKG_NAME}.tgz" -C "$prefix" .
 echo "travis_fold:end:tar.bin"
 
 #--- test

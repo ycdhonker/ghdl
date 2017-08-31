@@ -49,6 +49,7 @@ echo "travis_fold:end:env.docker"
 
 echo "travis_fold:start:gpl.src"
 printf "$ANSI_YELLOW[Source] create GPL sources $ANSI_NOCOLOR\n"
+rmdir deploy
 VER=`echo $TAG | sed -e s/-/~/g` # dash is not allowed in debian version
 PKG_DIR="ghdl-$VER"
 mv dist/debian .
@@ -75,6 +76,7 @@ echo "$ANSI_YELLOW[GHDL] Build package $ANSO_NOCOLOR"
 cd $PKG_DIR
 dpkg-buildpackage -us -uc
 cd ..
+mkdir deploy
 mv ghdl_*.tar.* ghdl_*.{deb,dsc} deploy
 echo "travis_fold:end:build"
 
