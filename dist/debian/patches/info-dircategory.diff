@@ -3,11 +3,12 @@ Author: Joris van Rantwijk <joris@jorisvr.nl>
 
 --- a/doc/ghdl.texi
 +++ b/doc/ghdl.texi
-@@ -4,6 +4,7 @@
- @settitle GHDL guide
- @c %**end of header
- 
+@@ -10,7 +10,7 @@
+ @paragraphindent 0
+ @exampleindent 4
+ @finalout
+-@dircategory Miscellaneous
 +@dircategory Software development
  @direntry
- * ghdl: (ghdl).         VHDL compiler.
+ * GHDL: (GHDL.info). VHDL simulator.
  @end direntry

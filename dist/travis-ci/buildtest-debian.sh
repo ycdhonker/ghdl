@@ -54,7 +54,7 @@ PKG_DIR="ghdl-$VER"
 mv dist/debian .
 if head -1 debian/changelog | grep -q UNRELEASED; then
     # Patch debian version with tag
-    sed -i -e "1/s/ghdl .* UNRELEASED/ghdl (${VER}-1) UNRELEASED/" debian/changelog
+    sed -i -e "1s/ghdl .* UNRELEASED/ghdl (${VER}-1) UNRELEASED/" debian/changelog
 fi
 
 files=`echo *`
