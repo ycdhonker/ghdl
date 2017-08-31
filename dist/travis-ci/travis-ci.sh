@@ -45,6 +45,9 @@ BUILD_CMD="$BUILD_CMD $ENABLECOLOR -d $DDIST -b $DBLD -p $DPKG -t $GIT_TAG"
 
 echo "build cmd: $BUILD_CMD"
 
+# Files to be deployed
+mkdir deploy
+
 # Build
 
 if [ "$TRAVIS_OS_NAME" = "osx" ]; then
@@ -80,7 +83,7 @@ else
 fi
 
 
-ls -ld ghdl-*
+ls -l deploy
 
 if [ ! -f build_ok ]; then
     printf "$ANSI_RED[TRAVIS] BUILD failed $ANSI_NOCOLOR\n"

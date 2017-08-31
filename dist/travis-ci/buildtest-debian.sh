@@ -75,6 +75,7 @@ echo "$ANSI_YELLOW[GHDL] Build package $ANSO_NOCOLOR"
 cd $PKG_DIR
 dpkg-buildpackage -us -uc
 cd ..
+mv ghdl_*.tar.* ghdl_*.{deb,dsc} deploy
 echo "travis_fold:end:build"
 
 
