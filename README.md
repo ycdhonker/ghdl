@@ -110,3 +110,5 @@ You can find specific instructions for each of the options in '[Building](http:/
 - [ghdlsynth-beta](https://github.com/tgingold/ghdlsynth-beta) is the integration of GHDL as a frontend plugin module for [Yosys Open SYnthesis Suite](http://www.clifford.at/yosys/), which uses the `libghdlsynth` library.
 
 - `ghdl_simul`, which supports interpreted simulation, is available for historical reasons and for development/debugging only. It is very slow compared to the 'regular' compiled simulation and not all the features are supported.
+
+this is usefull tool to simulate the VHDL RTL behaviror.
